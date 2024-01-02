@@ -34,7 +34,7 @@ SET(_glm_HEADER_SEARCH_DIRS
 "/usr/local/include"
 "${CMAKE_SOURCE_DIR}/includes"
 "C:/Program Files (x86)/glm"
-"/Users/jinypark/.brew/Cellar/glm/0.9.9.8/include" )
+"~/.brew/Cellar/glm/0.9.9.8/include" )
 # check environment variable
 SET(_glm_ENV_ROOT_DIR "$ENV{GLM_ROOT_DIR}")
 IF(NOT GLM_ROOT_DIR AND _glm_ENV_ROOT_DIR)

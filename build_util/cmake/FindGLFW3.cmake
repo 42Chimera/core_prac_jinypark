@@ -19,13 +19,13 @@ set( _glfw3_HEADER_SEARCH_DIRS
 "/usr/local/include"
 "${CMAKE_SOURCE_DIR}/includes"
 "C:/Program Files (x86)/glfw/include"
-"/Users/jinypark/.brew/Cellar/glfw/3.3.9/include" )
+"~/.brew/Cellar/glfw/3.3.9/include" )
 set( _glfw3_LIB_SEARCH_DIRS
 "/usr/lib"
 "/usr/local/lib"
 "${CMAKE_SOURCE_DIR}/lib"
 "C:/Program Files (x86)/glfw/lib-msvc110"
-"/Users/jinypark/.brew/Cellar/glfw/3.3.9/lib" )
+"~/.brew/Cellar/glfw/3.3.9/lib" )
 
 # Check environment for root search directory
 set( _glfw3_ENV_ROOT $ENV{GLFW3_ROOT} )
