@@ -6,5 +6,7 @@ SRCS		=	main.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all:
-	mkdir -p build;\
-	cd build && cmake .. && make
+	cd Engine/build && cmake .. && make
+
+run: all
+	./Engine/Chimera_core

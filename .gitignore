@@ -34,7 +34,4 @@
 *.out
 *.app
 
-# CMake build files
-build/*
-
 .DS_Store
