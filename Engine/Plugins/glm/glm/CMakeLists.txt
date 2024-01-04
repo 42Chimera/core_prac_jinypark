@@ -67,3 +67,10 @@ else()
 	add_library(glm::glm ALIAS glm)
 	target_link_libraries(glm INTERFACE glm-header-only)
 endif()
+
+add_custom_command(TARGET glm POST_BUILD
+                   COMMAND ${CMAKE_COMMAND} 
+                   -E copy $<TARGET_FILE:glm> 
+                   ${CMAKE_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME}/${PROJECT_NAME}/$<TARGET_FILE_NAME:glm>)
+
+

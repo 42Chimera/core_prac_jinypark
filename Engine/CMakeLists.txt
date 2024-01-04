@@ -4,24 +4,12 @@ project(Chimera_core)
 
 set(CMAKE_CXX_STANDARD 17)
 
-# 프로젝트에 라이브러리가 없을 경우, 로컬에 설치된 라이브러리를 검색합니다.
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/Build/BuildUtil/CMake")
+file(GLOB PLUGINS
+	Plugins/*)
 
-add_subdirectory(
-	"Plugins/glfw"
-    "${CMAKE_SOURCE_DIR}/Binaries/test/glfw"
-	)
-	
-add_subdirectory(
-	"Plugins/glad"
-	"${CMAKE_SOURCE_DIR}/Binaries/test/glad"
-	)
-
-# find required packages
-find_package(GLM REQUIRED)
-# find_package(GLFW3 REQUIRED)
-		
-set(LIBS ${LIBS} glad glfw)
+foreach(plugin IN LISTS PLUGINS)
+	add_subdirectory(${plugin})	
+endforeach()
 
 if(APPLE)
 	INCLUDE_DIRECTORIES(/System/Library/Frameworks)
@@ -37,6 +25,8 @@ endif(APPLE)
 
 set(GLAD_INCLUDE_DIR "Plugins/glad/include")
 
+set(LIBS ${LIBS} glm glad glfw)
+
 file(GLOB SOURCE
 	source/*.cpp
 )
@@ -44,8 +34,8 @@ file(GLOB SOURCE
 include_directories(${CMAKE_PROJECT_NAME}
 	PUBLIC
 	include
-	${GLM_INCLUDE_DIR}
-	${GLFW3_INCLUDE_DIR}
+	# ${GLM_INCLUDE_DIR}
+	# ${GLFW3_INCLUDE_DIR}
 	${GLAD_INCLUDE_DIR}
 )
 
