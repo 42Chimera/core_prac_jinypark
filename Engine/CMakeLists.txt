@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.27)
 
 project(Chimera_core)
-set(NAME Chimera_core)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -20,11 +19,9 @@ add_subdirectory(
 
 # find required packages
 find_package(GLM REQUIRED)
-find_package(GLFW3 REQUIRED)
+# find_package(GLFW3 REQUIRED)
 		
-# set required libraries
-set(LIBS ${LIBS} ${GLFW3_LIBRARY})
-set(LIBS ${LIBS} GLAD)
+set(LIBS ${LIBS} glad glfw)
 
 if(APPLE)
 	INCLUDE_DIRECTORIES(/System/Library/Frameworks)
@@ -44,7 +41,7 @@ file(GLOB SOURCE
 	source/*.cpp
 )
 
-include_directories(${NAME}
+include_directories(${CMAKE_PROJECT_NAME}
 	PUBLIC
 	include
 	${GLM_INCLUDE_DIR}
@@ -52,18 +49,11 @@ include_directories(${NAME}
 	${GLAD_INCLUDE_DIR}
 )
 
-add_executable(${NAME} ${SOURCE})
+add_executable(${CMAKE_PROJECT_NAME} ${SOURCE})
 
-target_link_libraries(${NAME} ${LIBS})
+target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
-# target_compile_definitions(${NAME}
+# target_compile_definitions(${CMAKE_PROJECT_NAME}
 # 	PRIVATE
 #     ROOT_PATH="${CMAKE_SOURCE_DIR}"
-# )
-
-# set_target_properties(${NAME}
-#     PROPERTIES
-#     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/libar"
-#     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/liblib"
-#     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}"
 # )

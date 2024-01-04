@@ -3,4 +3,4 @@ include_directories(${NAME}
     include
 )
 
-add_library(GLAD "src/glad.c")
+add_library(glad "src/glad.c")

@@ -6,7 +6,7 @@ SRCS		=	main.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 
 all:
-	cd Engine/build && cmake .. && make
+	cd Engine/build && cmake .. && cmake --build .
 
 run: all
 	./Engine/Chimera_core
