@@ -399,8 +399,10 @@ if (GLFW_INSTALL)
 endif()
 
 add_custom_command(TARGET glfw POST_BUILD
+                    COMMAND ${CMAKE_COMMAND}
+                    -E make_directory ${CMAKE_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME}/${PROJECT_NAME}
                    COMMAND ${CMAKE_COMMAND} 
-                   -E copy $<TARGET_FILE:glfw> 
-                   ${CMAKE_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME}/${PROJECT_NAME}/$<TARGET_FILE_NAME:glfw>)
+                   -E create_symlink ${CMAKE_BINARY_DIR}/Plugins/glfw/src/libglfw.dylib
+                   ${CMAKE_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME}/${PROJECT_NAME}/libglfw.dylib)
 
 

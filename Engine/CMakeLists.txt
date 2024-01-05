@@ -40,6 +40,10 @@ add_executable(${CMAKE_PROJECT_NAME} ${SOURCE})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
+					  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
+)
+
 # ----------------------------------------------------------------------------
 # Add Custom makefile rule (ex make fclean, re)
 ADD_CUSTOM_TARGET( re
