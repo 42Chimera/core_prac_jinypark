@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.27)
 
-project(Chimera_core)
+project(ChimeraEngineCore)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -33,9 +33,6 @@ file(GLOB SOURCE
 
 include_directories(${CMAKE_PROJECT_NAME}
 	PUBLIC
-	include
-	# ${GLM_INCLUDE_DIR}
-	# ${GLFW3_INCLUDE_DIR}
 	${GLAD_INCLUDE_DIR}
 )
 
@@ -43,7 +40,17 @@ add_executable(${CMAKE_PROJECT_NAME} ${SOURCE})
 
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
-# target_compile_definitions(${CMAKE_PROJECT_NAME}
-# 	PRIVATE
-#     ROOT_PATH="${CMAKE_SOURCE_DIR}"
-# )
+# ----------------------------------------------------------------------------
+# Add Custom makefile rule (ex make fclean, re)
+ADD_CUSTOM_TARGET( re
+        COMMENT "Re-building..."
+        COMMAND make fclean && make all
+        # ...
+        )
+
+ADD_CUSTOM_TARGET( fclean
+        COMMENT "Cleaning config files, executable and binaries..."
+        COMMAND make clean
+		COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/Binaries
+		COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_SOURCE_DIR}/Config
+        )

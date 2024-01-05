@@ -51,7 +51,7 @@ target_include_directories(glm-header-only INTERFACE
 )
 
 if (GLM_BUILD_LIBRARY)
-	add_library(glm
+	add_library(glm SHARED
 		${ROOT_TEXT}      ${ROOT_MD}        ${ROOT_NAT}
 		${ROOT_SOURCE}    ${ROOT_INLINE}    ${ROOT_HEADER}
 		${CORE_SOURCE}    ${CORE_INLINE}    ${CORE_HEADER}

@@ -1,3 +1,1 @@
 # core_prac_jinypark
-
-![img](https://i.namu.wiki/i/tGwmnV9dpd_UfTM1TqR6s45n9sd6xn3sidKCB0vmUuSiSLiZvei8V6kD4vzdRQqkwybdyCTt6iNa7YzO4QrhdkgsKhj3sBxawhARLVXs4Ri3eANcVx-cmKQvpKvCkm4rnhtOGDVAQcV0sH9-BV1lLA.webp)

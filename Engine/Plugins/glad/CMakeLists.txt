@@ -1,4 +1,4 @@
-include_directories(${NAME}
+include_directories(glad
     PUBLIC
     include
 )
