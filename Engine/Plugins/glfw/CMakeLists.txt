@@ -14,11 +14,11 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 string(COMPARE EQUAL "${CMAKE_CURRENT_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}" GLFW_STANDALONE)
 
-option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 option(GLFW_BUILD_EXAMPLES "Build the GLFW example programs" ${GLFW_STANDALONE})
-option(GLFW_BUILD_TESTS "Build the GLFW test programs" OFF)
-option(GLFW_BUILD_DOCS "Build the GLFW documentation" ON)
-option(GLFW_INSTALL "Generate installation target" ON)
+option(GLFW_BUILD_TESTS "Build the GLFW test programs" ${GLFW_STANDALONE})
+option(GLFW_BUILD_DOCS "Build the GLFW documentation" ${GLFW_STANDALONE})
+option(GLFW_INSTALL "Generate installation target" OFF)
 
 include(GNUInstallDirs)
 include(CMakeDependentOption)
@@ -38,10 +38,8 @@ cmake_dependent_option(GLFW_USE_HYBRID_HPG "Force use of high-performance GPU on
 cmake_dependent_option(USE_MSVC_RUNTIME_LIBRARY_DLL "Use MSVC runtime library DLL" ON
                        "MSVC" OFF)
 
-# set(GLFW_LIBRARY_TYPE "${GLFW_LIBRARY_TYPE}" CACHE STRING
-#     "Library type override for GLFW (SHARED, STATIC, OBJECT, or empty to follow BUILD_SHARED_LIBS)")
-
-set(GLFW_LIBRARY_TYPE SHARED)
+set(GLFW_LIBRARY_TYPE "${GLFW_LIBRARY_TYPE}" CACHE STRING
+    "Library type override for GLFW (SHARED, STATIC, OBJECT, or empty to follow BUILD_SHARED_LIBS)")
 
 if (GLFW_LIBRARY_TYPE)
     if (GLFW_LIBRARY_TYPE STREQUAL "SHARED")
@@ -141,7 +139,13 @@ endif()
 # The library is installed by src/CMakeLists.txt
 #--------------------------------------------------------------------
 if (GLFW_INSTALL)
-    install(DIRECTORY include/GLFW DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}
+    MESSAGE(STATUS "Installing GLFW ${GLFW_VERSION}")
+    MESSAGE(STATUS "    Libraries: ${CMAKE_INSTALL_LIBDIR}")
+    MESSAGE(STATUS "    Includes:  ${CMAKE_INSTALL_INCLUDEDIR}")
+    MESSAGE(STATUS "    Config:    ${GLFW_CONFIG_PATH}")
+    MESSAGE(STATUS "    Full Lib:     ${CMAKE_INSTALL_FULL_LIBDIR}")
+    MESSAGE(STATUS "    Full Inc:      ${CMAKE_INSTALL_FULL_INCLUDEDIR}")
+    install(DIRECTORY include/GLFW DESTINATION ${CMAKE_INSTALL_FULL_INCLUDEDIR}
             FILES_MATCHING PATTERN glfw3.h PATTERN glfw3native.h)
 
     install(FILES "${GLFW_BINARY_DIR}/src/glfw3Config.cmake"
@@ -171,4 +175,7 @@ if (GLFW_INSTALL)
     endif()
 endif()
 
-
+set_target_properties(glfw PROPERTIES
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")

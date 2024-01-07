@@ -25,24 +25,29 @@ endif(APPLE)
 
 set(GLAD_INCLUDE_DIR "Plugins/glad/include")
 
-set(LIBS ${LIBS} glm glad glfw)
+set(LIBS ${LIBS}
+		 glm
+		 glad
+		 glfw
+)
 
 file(GLOB SOURCE
 	source/*.cpp
 )
 
-include_directories(${CMAKE_PROJECT_NAME}
-	PUBLIC
+include_directories(${CMAKE_PROJECT_NAME} PUBLIC
 	${GLAD_INCLUDE_DIR}
 )
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCE})
 
+
 target_link_libraries(${CMAKE_PROJECT_NAME} ${LIBS})
 
 set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
-					  RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}
-)
+                      RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
+                      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # ----------------------------------------------------------------------------
 # Add Custom makefile rule (ex make fclean, re)
