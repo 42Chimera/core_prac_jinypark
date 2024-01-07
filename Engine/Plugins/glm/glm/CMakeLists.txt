@@ -51,7 +51,7 @@ target_include_directories(glm-header-only INTERFACE
 )
 
 if (GLM_BUILD_LIBRARY)
-	add_library(glm
+	add_library(glm SHARED
 		${ROOT_TEXT}      ${ROOT_MD}        ${ROOT_NAT}
 		${ROOT_SOURCE}    ${ROOT_INLINE}    ${ROOT_HEADER}
 		${CORE_SOURCE}    ${CORE_INLINE}    ${CORE_HEADER}
@@ -67,10 +67,4 @@ else()
 	add_library(glm::glm ALIAS glm)
 	target_link_libraries(glm INTERFACE glm-header-only)
 endif()
-
-add_custom_command(TARGET glm POST_BUILD
-                   COMMAND ${CMAKE_COMMAND} 
-                   -E copy $<TARGET_FILE:glm> 
-                   ${CMAKE_SOURCE_DIR}/Binaries/${CMAKE_SYSTEM_NAME}/${PROJECT_NAME}/$<TARGET_FILE_NAME:glm>)
-
 
